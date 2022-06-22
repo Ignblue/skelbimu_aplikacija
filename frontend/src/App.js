@@ -39,7 +39,8 @@ function App()
 
       <NavBar set_state_current_view={set_state_current_view}
       state_vartotojas={state_vartotojas}
-        fetch_state_vartotojas={fecth_state_vartotojas}
+      fetch_state_vartotojas={fecth_state_vartotojas}
+      set_state_status_text={set_state_status_text}
 
       />
  

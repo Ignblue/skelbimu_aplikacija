@@ -1,24 +1,71 @@
 import "./NavBar.css"
-const NavBar = ({ set_state_current_view, state_vartotojas }) =>
-{
-    return (
-        <div className="NavBar">
- 
-            <span>logo</span>
- 
-            <span></span>
-            
-            <span>{state_vartotojas.vardas}</span>
- 
-            <span>{state_vartotojas.tipas}</span>
+import axios from "axios"
 
+const NavBar = ({ set_state_current_view, state_vartotojas, fetch_state_vartotojas, set_state_status_text }) =>
+{
+     const handle_click = async () =>
+    {
+        try
+        {
+            set_state_status_text("Vykdoma...")
+            const axios_result = await axios({
+                method: "delete",
+                url: "/api/login",
+                data: {}
+            })
+            set_state_status_text("Atlikta")
+            setTimeout(() => { set_state_status_text("") }, 1000)
+            fetch_state_vartotojas()
+            set_state_current_view("SignIn")
+        }
+        catch (err)
+        {
+            set_state_status_text("Klaida")
+            setTimeout(() => { set_state_status_text("") }, 1000)
+        }
+    }
  
-            <button onClick={() => { set_state_current_view("SignUp") }}>SignUp</button>
+    if (state_vartotojas.vardas === undefined)
+    {
+        return (
+            <div className="NavBar">
  
-            <button onClick={() => { set_state_current_view("SignIn") }}>SignIn</button>
+                <span>logo</span>
  
-        </div>
-    )
+                <span></span>
+ 
+                <span></span>
+ 
+                <span></span>
+ 
+                <button onClick={() => { set_state_current_view("SignUp") }}>SignUp</button>
+ 
+                <button onClick={() => { set_state_current_view("SignIn") }}>SignIn</button>
+ 
+            </div>
+        )
+    }
+    else if (state_vartotojas.tipas === "vartotojas")
+    {
+        return (
+            <div className="NavBar">
+ 
+                <span>logo</span>
+ 
+                <span></span>
+ 
+                <span></span>
+ 
+                <span>{state_vartotojas.vardas}</span>
+ 
+                <span>({state_vartotojas.tipas})</span>
+ 
+                <button onClick={handle_click}>SignOut</button>
+ 
+            </div>
+        )
+    }
 }
  
 export default NavBar
+
