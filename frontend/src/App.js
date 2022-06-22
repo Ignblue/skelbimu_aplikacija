@@ -2,6 +2,9 @@ import './App.css'
 import { useState } from 'react'
 import SignUp from './components/SignUp'
 import Status from './components/Status'
+import SignIn from './components/SingIn'
+import NavBar from './components/NavBar'
+import FooterBar from './components/FooterBar'
  
 function App()
 {
@@ -11,6 +14,8 @@ function App()
  
   return (
     <div className="App">
+
+      <NavBar set_state_current_view={set_state_current_view} />
  
 {
         (() =>
@@ -19,9 +24,16 @@ function App()
           {
             return <SignUp set_state_status_text={set_state_status_text} />
           }
+          else if (state_current_view === "SignIn")
+          {
+            return <SignIn set_state_status_text={set_state_status_text} />
+          }
+
         })()
       }
  
+ <FooterBar/>
+
       {
         state_status_text !== "" ?
           <Status state_status_text={state_status_text} />
