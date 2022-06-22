@@ -7,6 +7,7 @@ import NavBar from './components/NavBar'
 import FooterBar from './components/FooterBar'
 import axios from "axios"
 import Kategorijos from './components/Kategorijos'
+import CreateSkelbimas from './components/CreateSkelbimas'
  
 function App()
 {
@@ -67,7 +68,12 @@ else if (state_current_view === "Kategorijos")
               set_state_status_text={set_state_status_text}
             />
           }
-
+else if (state_current_view === "CreateSkelbimas")
+          {
+            return <CreateSkelbimas
+              set_state_status_text={set_state_status_text}
+            />
+          }
 
         })()
       }
