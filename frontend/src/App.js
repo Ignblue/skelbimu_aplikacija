@@ -6,6 +6,7 @@ import SignIn from './components/SingIn'
 import NavBar from './components/NavBar'
 import FooterBar from './components/FooterBar'
 import axios from "axios"
+import Kategorijos from './components/Kategorijos'
  
 function App()
 {
@@ -59,6 +60,14 @@ function App()
             fetch_state_vartotojas={fecth_state_vartotojas}
             />
           }
+
+else if (state_current_view === "Kategorijos")
+          {
+            return <Kategorijos
+              set_state_status_text={set_state_status_text}
+            />
+          }
+
 
         })()
       }

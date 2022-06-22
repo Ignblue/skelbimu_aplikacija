@@ -65,6 +65,27 @@ const NavBar = ({ set_state_current_view, state_vartotojas, fetch_state_vartotoj
             </div>
         )
     }
+else if (state_vartotojas.tipas === "administratorius")
+    {
+        return (
+            <div className="NavBar">
+ 
+                <span>logo</span>
+ 
+                <span></span>
+ 
+                <span>{state_vartotojas.vardas}</span>
+ 
+                <span>({state_vartotojas.tipas})</span>
+ 
+                <button onClick={() => { set_state_current_view("Kategorijos") }}>Kategorijos</button>
+ 
+                <button onClick={handle_click}>SignOut</button>
+ 
+            </div>
+        )
+    }
+
 }
  
 export default NavBar
