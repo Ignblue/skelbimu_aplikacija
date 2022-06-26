@@ -10,6 +10,7 @@ import Kategorijos from './components/Kategorijos'
 import CreateSkelbimas from './components/CreateSkelbimas'
 import Skelbimai from './components/skelbimai'
 import ManoSkelbimai from './components/ManoSkelbimai'
+import PatikusiuSarasas from './components/PatikusiuSarasas'
  
 function App()
 {
@@ -100,8 +101,20 @@ if (state_current_view === "ManoSkelbimai")
               state_vartotojas={state_vartotojas}
             />
           }
+
+          if (state_current_view === "PatikusiuSarasas")
+          {
+            fecth_state_vartotojas()
+            return <PatikusiuSarasas
+              state_vartotojas={state_vartotojas}
+              set_state_status_text={set_state_status_text}
+            />
+          }
+
         })()
       }
+
+      
  
  <FooterBar/>
 

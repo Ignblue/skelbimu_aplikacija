@@ -54,6 +54,25 @@ const SkelbimasBig = ({ _id, handle_close, set_state_status_text }) =>
             setTimeout(() => { set_state_status_text("") }, 1000)
         }
     }
+ const handle_add_to_patikusiu_sarasas = async (_id) =>
+    {
+        try
+        {
+            set_state_status_text("Vykdoma...")
+            const result = await axios({
+                method: "post",
+                url: `/api/vartotojai/current/patikusiu_sarasas`,
+                data: { _id: _id }
+            })
+            set_state_status_text("Atlikta")
+            setTimeout(() => { set_state_status_text("") }, 1000)
+        }
+        catch (err)
+        {
+            set_state_status_text("Klaida")
+            setTimeout(() => { set_state_status_text("") }, 1000)
+        }
+    }
 
  
     if (state_status === "loading")
@@ -95,7 +114,7 @@ const SkelbimasBig = ({ _id, handle_close, set_state_status_text }) =>
  
                 <button onClick={() => { handle_add_komentaras(_id, ref_textarea_komentaras.current.value) }}>komentuoti</button>
 
- 
+                 <button onClick={() => { handle_add_to_patikusiu_sarasas(_id) }}>Pridėti į patikusių sąrašą</button>
                 <button onClick={handle_close}>close</button>
  
             </div >

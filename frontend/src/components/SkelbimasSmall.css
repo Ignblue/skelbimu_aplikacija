@@ -1,33 +1,47 @@
-.SkelbimasBigEdit {
-    position: fixed;
-    overflow: auto;
-    left: 1em;
-    right: 1em;
-    top: 1em;
-    bottom: 1em;
-    background-color: white;
-    border: 0.1em solid lightgray;
-    border-radius: 1em;
-    padding: 1em;
-    display: grid;
-    align-items: center;
-    justify-items: center;
-}
-
-.SkelbimasBigEdit>img {
+.SkelbimasSmall {
     width: 100%;
-    max-height: 60vh;
-    object-fit: contain;
+    height: 8em;
+    display: grid;
+    grid-template-areas:
+        "e a a"
+        "e b b"
+        "e c d";
+
+    grid-template-columns: 10em auto 10em;
+
+    border-bottom: 0.1em solid lightgray;
 }
 
-.SkelbimasBigEdit>textarea {
-    width: 90%;
-    height: 6em;
-    resize: none;
-    border-radius: 1em;
-    padding: 1em;
+.SkelbimasSmall:hover {
+    background-color: beige;
 }
 
-.SkelbimasBigEdit>input {
-    width: 90%;
+.SkelbimasSmall :nth-child(1) {
+    grid-area: a;
+    font-weight: 900;
+    height: 1.5em;
+}
+
+.SkelbimasSmall :nth-child(2) {
+    grid-area: b;
+    height: 5em;
+    overflow: hidden;
+}
+
+.SkelbimasSmall :nth-child(3) {
+    grid-area: c;
+    height: 1.5em;
+}
+
+.SkelbimasSmall :nth-child(4) {
+    grid-area: d;
+}
+
+.SkelbimasSmall :nth-child(5) {
+    grid-area: e;
+    width: 9em;
+    height: 7em;
+    object-fit: cover;
+    align-self: center;
+    justify-self: center;
 }
