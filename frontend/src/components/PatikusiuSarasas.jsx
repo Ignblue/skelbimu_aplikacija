@@ -3,16 +3,16 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import SkelbimasSmall from "./SkelbimasSmall"
 import SkelbimasBig from "./SkelbimasBig"
- 
+
 const PatikusiuSarasas = ({ state_vartotojas, set_state_status_text }) =>
 {
     // success loading error
     const [state_status, set_state_status] = useState("")
- 
+
     const [state_skelbimai, set_state_skelbimai] = useState([])
- 
+
     const [state_skelbimas_id, set_state_skelbimas_id] = useState(null)
- 
+
     const handle_read = async () =>
     {
         try
@@ -30,7 +30,7 @@ const PatikusiuSarasas = ({ state_vartotojas, set_state_status_text }) =>
             set_state_status("error")
         }
     }
- 
+
     const handle_remove = async (_id) =>
     {
         try
@@ -50,9 +50,9 @@ const PatikusiuSarasas = ({ state_vartotojas, set_state_status_text }) =>
             setTimeout(() => { set_state_status_text("") }, 1000)
         }
     }
- 
+
     useEffect(() => { handle_read() }, [])
- 
+
     if (state_status === "loading")
     {
         return (
@@ -61,7 +61,7 @@ const PatikusiuSarasas = ({ state_vartotojas, set_state_status_text }) =>
             </div>
         )
     }
- 
+
     if (state_status === "error")
     {
         return (
@@ -71,13 +71,13 @@ const PatikusiuSarasas = ({ state_vartotojas, set_state_status_text }) =>
             </div>
         )
     }
- 
+
     if (state_status === "success")
     {
- 
+
         return (
             <div className="PatikusiuSarasas">
- 
+
                 {
                     state_skelbimai.map((ele, i) =>
                     {
@@ -87,7 +87,7 @@ const PatikusiuSarasas = ({ state_vartotojas, set_state_status_text }) =>
                         </div>
                     })
                 }
- 
+
                 {
                     state_skelbimas_id !== null ?
                         <SkelbimasBig
@@ -102,7 +102,7 @@ const PatikusiuSarasas = ({ state_vartotojas, set_state_status_text }) =>
                         :
                         null
                 }
- 
+
             </div>
         )
     }

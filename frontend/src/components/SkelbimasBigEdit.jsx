@@ -1,14 +1,15 @@
 import "./SkelbimasBigEdit.css"
 import { useState, createRef, useEffect } from "react"
 import axios from "axios"
- 
+import Komentaras from "./Komentaras"
+
 const SkelbimasBigEdit = ({ _id, handle_close, set_state_status_text }) =>
 {
     //success loading error
     const [state_status, set_state_status] = useState("")
- 
+
     const [state_skelbimas, set_state_skelbimas] = useState({})
- 
+
     const handle_read = async (_id) =>
     {
         try
@@ -26,9 +27,9 @@ const SkelbimasBigEdit = ({ _id, handle_close, set_state_status_text }) =>
             set_state_status("error")
         }
     }
- 
+
     useEffect(() => { handle_read(_id) }, [])
- 
+
     const handle_update = async (_id, data) =>
     {
         try
@@ -49,7 +50,7 @@ const SkelbimasBigEdit = ({ _id, handle_close, set_state_status_text }) =>
             setTimeout(() => { set_state_status_text("") }, 1000)
         }
     }
- 
+
     const handle_delete = async (_id) =>
     {
         try
@@ -88,7 +89,6 @@ const SkelbimasBigEdit = ({ _id, handle_close, set_state_status_text }) =>
         }
     }
 
- 
     if (state_status === "loading")
     {
         return (
@@ -98,7 +98,7 @@ const SkelbimasBigEdit = ({ _id, handle_close, set_state_status_text }) =>
             </div>
         )
     }
- 
+
     if (state_status === "error")
     {
         return (
@@ -108,43 +108,43 @@ const SkelbimasBigEdit = ({ _id, handle_close, set_state_status_text }) =>
             </div>
         )
     }
- 
+
     if (state_status === "success")
     {
         return (
             <div className="SkelbimasBigEdit">
- 
+
                 <img src={state_skelbimas.nuotrauka_base64} />
- 
+
                 <input type="file" onChange={(param) =>
                 {
                     const fileReader_1 = new FileReader()
- 
+
                     fileReader_1.addEventListener('loadend', () =>
                     {
                         const copy_of_state_skelbimas = { ...state_skelbimas }
                         copy_of_state_skelbimas.nuotrauka_base64 = fileReader_1.result
                         set_state_skelbimas(copy_of_state_skelbimas)
                     })
- 
+
                     fileReader_1.readAsDataURL(param.target.files[0])
                 }}
                 />
- 
+
                 <input type="text" value={state_skelbimas.pavadinimas} onChange={(param_1) =>
                 {
                     const copy_of_state_skelbimas = { ...state_skelbimas }
                     copy_of_state_skelbimas.pavadinimas = param_1.target.value
                     set_state_skelbimas(copy_of_state_skelbimas)
                 }} />
- 
+
                 <textarea value={state_skelbimas.aprasas} onChange={(param_1) =>
                 {
                     const copy_of_state_skelbimas = { ...state_skelbimas }
                     copy_of_state_skelbimas.aprasas = param_1.target.value
                     set_state_skelbimas(copy_of_state_skelbimas)
                 }} />
- 
+
                 <input type="number" value={state_skelbimas.kaina} onChange={(param_1) =>
                 {
                     const copy_of_state_skelbimas = { ...state_skelbimas }
@@ -157,13 +157,13 @@ const SkelbimasBigEdit = ({ _id, handle_close, set_state_status_text }) =>
                     {
                         return (
                             <div key={i}>
+                                <Komentaras komentaras={ele} />
                                 <button onClick={() => { handle_delete_komentaras(_id, ele._id) }}>trinti</button>
                             </div>
                         )
                     })
                 }
 
- 
                 <button onClick={() =>
                 {
                     const copy_of_state_skelbimas = { ...state_skelbimas }
@@ -174,14 +174,14 @@ const SkelbimasBigEdit = ({ _id, handle_close, set_state_status_text }) =>
                     handle_update(_id, copy_of_state_skelbimas)
                 }
                 }>įrašyti</button>
- 
+
                 <button onClick={() => { handle_delete(_id) }}>Ištrinti skelbimą</button>
- 
+
                 <button onClick={handle_close}>uždaryti</button>
- 
+
             </div >
         )
     }
 }
- 
+
 export default SkelbimasBigEdit

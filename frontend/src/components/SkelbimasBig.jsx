@@ -3,17 +3,15 @@ import { useState, createRef, useEffect } from "react"
 import axios from "axios"
 import Komentaras from "./Komentaras"
 
- 
 const SkelbimasBig = ({ _id, handle_close, set_state_status_text }) =>
 {
     //success loading error
     const [state_status, set_state_status] = useState("")
- 
+
     const [state_skelbimas, set_state_skelbimas] = useState({})
 
     const ref_textarea_komentaras = createRef()
 
- 
     const handle_read = async (_id, tekstas) =>
     {
         try
@@ -31,7 +29,7 @@ const SkelbimasBig = ({ _id, handle_close, set_state_status_text }) =>
             set_state_status("error")
         }
     }
- 
+
     useEffect(() => { handle_read(_id) }, [])
 
     const handle_add_komentaras = async (_id, tekstas) =>
@@ -54,7 +52,8 @@ const SkelbimasBig = ({ _id, handle_close, set_state_status_text }) =>
             setTimeout(() => { set_state_status_text("") }, 1000)
         }
     }
- const handle_add_to_patikusiu_sarasas = async (_id) =>
+
+    const handle_add_to_patikusiu_sarasas = async (_id) =>
     {
         try
         {
@@ -74,7 +73,6 @@ const SkelbimasBig = ({ _id, handle_close, set_state_status_text }) =>
         }
     }
 
- 
     if (state_status === "loading")
     {
         return (
@@ -84,7 +82,7 @@ const SkelbimasBig = ({ _id, handle_close, set_state_status_text }) =>
             </div>
         )
     }
- 
+
     if (state_status === "error")
     {
         return (
@@ -94,12 +92,12 @@ const SkelbimasBig = ({ _id, handle_close, set_state_status_text }) =>
             </div>
         )
     }
- 
+
     if (state_status === "success")
     {
         return (
             <div className="SkelbimasBig">
- 
+
                 <img src={state_skelbimas.nuotrauka_base64} />
                 <span>{state_skelbimas.autorius}</span>
                 <span>{state_skelbimas.pavadinimas}</span>
@@ -109,17 +107,18 @@ const SkelbimasBig = ({ _id, handle_close, set_state_status_text }) =>
                 {
                     state_skelbimas.komentarai.map((ele, i) => { return <Komentaras komentaras={ele} /> })
                 }
- 
+
                 <textarea ref={ref_textarea_komentaras}></textarea>
- 
+
                 <button onClick={() => { handle_add_komentaras(_id, ref_textarea_komentaras.current.value) }}>komentuoti</button>
 
-                 <button onClick={() => { handle_add_to_patikusiu_sarasas(_id) }}>Pridėti į patikusių sąrašą</button>
+                <button onClick={() => { handle_add_to_patikusiu_sarasas(_id) }}>Pridėti į patikusių sąrašą</button>
+
                 <button onClick={handle_close}>close</button>
- 
+
             </div >
         )
     }
 }
- 
+
 export default SkelbimasBig

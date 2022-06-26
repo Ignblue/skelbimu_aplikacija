@@ -1,12 +1,12 @@
 import "./SignIn.css"
 import axios from "axios"
 import { createRef } from "react"
- 
+
 const SignIn = ({ set_state_status_text, fetch_state_vartotojas }) =>
 {
     const ref_vardas = createRef()
     const ref_slaptazodis = createRef()
- 
+
     const handle_click = async () =>
     {
         try
@@ -23,7 +23,6 @@ const SignIn = ({ set_state_status_text, fetch_state_vartotojas }) =>
             set_state_status_text("Atlikta")
             setTimeout(() => { set_state_status_text("") }, 1000)
             fetch_state_vartotojas()
-
         }
         catch (err)
         {
@@ -31,7 +30,7 @@ const SignIn = ({ set_state_status_text, fetch_state_vartotojas }) =>
             setTimeout(() => { set_state_status_text("") }, 1000)
         }
     }
- 
+
     return (
         <div className="SignUp">
             <h1>Vartotojo autentifikavimosi puslapis</h1>
@@ -43,5 +42,5 @@ const SignIn = ({ set_state_status_text, fetch_state_vartotojas }) =>
         </div>
     )
 }
- 
+
 export default SignIn
