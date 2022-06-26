@@ -87,8 +87,7 @@ const controller_skelbimas_search = async (req, res) =>
     // input validation
     if (req.cookies.identification_cookie === undefined ||
         req.cookies.identification_cookie === "" ||
-        req.query.paieskos_fraze === undefined ||
-        req.query.kategorija === undefined)
+         (req.query.paieskos_fraze === undefined && req.query.kategorija === undefined && req.query.autorius === undefined))
     {
         res.statusCode = 500
         res.end()
@@ -110,13 +109,30 @@ const controller_skelbimas_search = async (req, res) =>
             res.end()
             return
         }
+
+         //filter
+        const filter = {}
+ 
+        if (req.query.paieskos_fraze !== undefined)
+        {
+            filter.aprasas = { $regex: `${req.query.paieskos_fraze}` }
+        }
+ 
+        if (req.query.kategorija!== undefined)
+        {
+            filter.kategorija = req.query.kategorija
+        }
+ 
+        if (req.query.autorius !== undefined)
+        {
+            filter.autorius = req.query.autorius
+        }
+
  
         // find
         const result_of_model_skelbimas_find = await model_skelbimas.find(
-            {
-                aprasas: { $regex: `${req.query.paieskos_fraze}` },
-                kategorija: req.query.kategorija
-            },
+            filter
+            ,
             {},
             { limit: 0 }
         )

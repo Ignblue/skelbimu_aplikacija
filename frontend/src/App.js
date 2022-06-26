@@ -9,7 +9,7 @@ import axios from "axios"
 import Kategorijos from './components/Kategorijos'
 import CreateSkelbimas from './components/CreateSkelbimas'
 import Skelbimai from './components/skelbimai'
-
+import ManoSkelbimai from './components/ManoSkelbimai'
  
 function App()
 {
@@ -28,6 +28,12 @@ function App()
         url: "/api/login",
         data: {}
       })
+
+if (state_vartotojas.vardas === axios_result.data.vardas)
+      {
+        return
+      }
+
       set_state_vartotojas({ vardas: axios_result.data.vardas, tipas: axios_result.data.tipas })
     }
     catch (err)
@@ -72,6 +78,7 @@ else if (state_current_view === "Kategorijos")
           }
 else if (state_current_view === "CreateSkelbimas")
           {
+             fecth_state_vartotojas()
             return <CreateSkelbimas
               set_state_status_text={set_state_status_text}
             />
@@ -79,12 +86,18 @@ else if (state_current_view === "CreateSkelbimas")
 
           else if (state_current_view === "Skelbimai")
           {
+             fecth_state_vartotojas()
             return <Skelbimai
               set_state_status_text={set_state_status_text}
             />
           }
-
-
+if (state_current_view === "ManoSkelbimai")
+          {
+            fecth_state_vartotojas()
+            return <ManoSkelbimai
+              state_vartotojas={state_vartotojas}
+            />
+          }
         })()
       }
  
