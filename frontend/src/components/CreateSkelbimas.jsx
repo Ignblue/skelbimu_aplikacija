@@ -76,7 +76,7 @@ const CreateSkelbimas = ({ set_state_status_text }) =>
             {
                 handle_create(
                     ref_pavadinimas.current.value,
-                    ref_kategorija.current.value,
+                    ref_kategorija,
                     ref_aprasas.current.value,
                     ref_kaina.current.value,
                     state_nuotrauka_base64

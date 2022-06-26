@@ -15,9 +15,9 @@ function App()
 {
   const [state_status_text, set_state_status_text] = useState("")
  
-  const [state_current_view, set_state_current_view] = useState("SignUp")
+  const [state_current_view, set_state_current_view] = useState("SignIn")
 
-  const [state_vartotojas, set_state_vartotojas] = useState({})
+  const [state_vartotojas, set_state_vartotojas] = useState(null)
  
   const fecth_state_vartotojas = async () =>
   {
@@ -29,7 +29,8 @@ function App()
         data: {}
       })
 
-if (state_vartotojas.vardas === axios_result.data.vardas)
+  if (state_vartotojas !== null &&
+        axios_result.data.vardas === state_vartotojas.vardas)
       {
         return
       }
@@ -72,6 +73,7 @@ if (state_vartotojas.vardas === axios_result.data.vardas)
 
 else if (state_current_view === "Kategorijos")
           {
+            fecth_state_vartotojas()
             return <Kategorijos
               set_state_status_text={set_state_status_text}
             />
