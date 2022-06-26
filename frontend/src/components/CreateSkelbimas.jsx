@@ -1,11 +1,13 @@
 import "./CreateSkelbimas.css"
 import axios from "axios"
 import { createRef, useState } from "react"
+import KategorijosSelect from "./KategorijosSelect"
  
 const CreateSkelbimas = ({ set_state_status_text }) =>
 {
     const ref_pavadinimas = createRef()
     const ref_kategorija = createRef()
+    const [state_kategorija, set_state_kategorija] = useState("")
     const ref_aprasas = createRef()
     const ref_kaina = createRef()
     const [state_nuotrauka_base64, set_state_nuotrauka_base64] = useState("")
@@ -43,9 +45,10 @@ const CreateSkelbimas = ({ set_state_status_text }) =>
  
             <span>pavadinimas</span>
             <input type="text" ref={ref_pavadinimas} />
-            
-            <span>kategorija</span>
-            <input type="text" ref={ref_kategorija} />
+
+            <KategorijosSelect
+                set_state_kategorija={set_state_kategorija}
+            />
             
             <span>aprasas</span>
             <textarea ref={ref_aprasas} />
